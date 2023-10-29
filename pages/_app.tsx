@@ -1,4 +1,4 @@
-import { theme } from "@/ui/theme";
+import { theme } from "@/theme/theme";
 import { ThemeProvider } from "@mui/material";
 import type { AppProps } from "next/app";
 
