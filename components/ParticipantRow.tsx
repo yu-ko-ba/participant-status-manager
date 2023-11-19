@@ -1,5 +1,4 @@
 import { Participant } from "@/types/Participant";
-import { Participation } from "@/types/participation";
 import { MoreVert } from "@mui/icons-material";
 import {
   Box,
@@ -7,11 +6,10 @@ import {
   FormControlLabel,
   FormGroup,
   IconButton,
-  MenuItem,
-  Select,
   Stack,
   Typography,
 } from "@mui/material";
+import { ParticipationStatusSelectBox } from "./ParticipationStatusSelectBox";
 
 type Props = {
   participant: Participant;
@@ -20,19 +18,7 @@ type Props = {
 export const ParticipantRow = ({ participant }: Props) => (
   <Stack direction="row" alignItems="center">
     <Typography>{participant.name}</Typography>
-    <Select
-      value={Participation.toString(participant.status)}
-    >
-      <MenuItem value={Participation.toString(Participation.will)}>
-        {Participation.toString(Participation.will)}
-      </MenuItem>
-      <MenuItem value={Participation.toString(Participation.in)}>
-        {Participation.toString(Participation.in)}
-      </MenuItem>
-      <MenuItem value={Participation.toString(Participation.finish)}>
-        {Participation.toString(Participation.finish)}
-      </MenuItem>
-    </Select>
+    <ParticipationStatusSelectBox status={participant.status} />
     <FormGroup>
       <FormControlLabel control={<Checkbox />} label="集金済み" />
     </FormGroup>

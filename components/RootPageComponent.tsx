@@ -1,4 +1,4 @@
-import { Container, CssBaseline, Divider, Stack } from "@mui/material";
+import { Container, Stack } from "@mui/material";
 import { Header } from "./Header";
 import { EventList } from "./EventList";
 import { Event } from "@/types/Event";
