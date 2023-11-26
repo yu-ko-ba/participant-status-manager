@@ -8,6 +8,6 @@ type Props = {
 
 export const EventList = ({ events }: Props) => (
   <Stack spacing={2}>
-    {events.map((e: EventType) => <Event event={e} key={e.name} />)}
+    {events ? events.map((e: EventType) => <Event event={e} key={e.name} />) : ""}
   </Stack>
 );

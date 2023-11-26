@@ -1,6 +1,6 @@
 import { Participant } from "./Participant";
 
 export type Event = {
-  name: String;
+  name: string;
   participants: Participant[];
 };

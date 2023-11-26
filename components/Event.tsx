@@ -1,13 +1,11 @@
 import { Event as EventType } from "@/types/Event";
 import { Participant } from "@/types/Participant";
-import { ExpandMore, MoreVert } from "@mui/icons-material";
+import { ExpandMore } from "@mui/icons-material";
 import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
-  Box,
   Divider,
-  IconButton,
   Stack,
   Typography,
 } from "@mui/material";
@@ -18,7 +16,7 @@ type Props = {
 };
 
 export const Event = ({ event }: Props) => (
-  <Accordion key={event.name}>
+  <Accordion>
     <AccordionSummary expandIcon={<ExpandMore />}>
       <Typography variant="h6">
         {event.name}
@@ -29,7 +27,7 @@ export const Event = ({ event }: Props) => (
         {event.participants.map((participant: Participant) => (
           <>
             <Divider />
-            <ParticipantRow participant={participant} key={participant.name} />
+            <ParticipantRow participant={participant} />
           </>
         ))}
       </Stack>
