@@ -1,11 +1,12 @@
 import { Event as EventType } from "@/types/Event";
 import { Participant } from "@/types/Participant";
-import { ExpandMore } from "@mui/icons-material";
+import { Add, ExpandMore } from "@mui/icons-material";
 import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
   Box,
+  Button,
   Divider,
   Stack,
   Typography,
@@ -31,6 +32,12 @@ export const Event = ({ event }: Props) => (
             <ParticipantRow participant={participant} />
           </Box>
         ))}
+        <Divider />
+        <Stack direction="row">
+          <Button startIcon={<Add />}>
+            参加者を追加
+          </Button>
+        </Stack>
       </Stack>
     </AccordionDetails>
   </Accordion>
