@@ -5,6 +5,7 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
+  Box,
   Divider,
   Stack,
   Typography,
@@ -25,10 +26,10 @@ export const Event = ({ event }: Props) => (
     <AccordionDetails>
       <Stack>
         {event.participants.map((participant: Participant) => (
-          <>
+          <Box key={participant.name}>
             <Divider />
             <ParticipantRow participant={participant} />
-          </>
+          </Box>
         ))}
       </Stack>
     </AccordionDetails>
