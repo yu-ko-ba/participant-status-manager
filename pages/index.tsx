@@ -1,9 +1,25 @@
-import { theme } from "@/ui/theme";
-import { ThemeProvider } from "@mui/material";
+import { RootPageComponent } from "@/components/RootPageComponent";
+import { Event } from "@/types/Event";
+import { Participant } from "@/types/Participant";
+import Head from "next/head";
 
 export default function Home() {
+  const events: Event[] = [
+    {
+      name: "なにかイベント名（○○オフ、など）",
+      participants: [
+        new Participant("Arisu"),
+        new Participant("Bob"),
+      ],
+    },
+  ];
   return (
-    <ThemeProvider theme={theme}>
-    </ThemeProvider>
+    <>
+      <Head>
+        <title>参加者名簿管理</title>
+      </Head>
+
+      <RootPageComponent events={events} />
+    </>
   );
 }
