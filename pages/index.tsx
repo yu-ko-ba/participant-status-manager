@@ -6,7 +6,7 @@ import Head from "next/head";
 export default function Home() {
   const events: Event[] = [
     {
-      name: "hoge",
+      name: "なにかイベント名（○○オフ、など）",
       participants: [
         new Participant("Arisu"),
         new Participant("Bob"),
