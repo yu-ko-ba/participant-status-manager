@@ -1,14 +1,20 @@
 import { Participation } from "@/types/participation";
-import { MenuItem, Select } from "@mui/material";
+import { MenuItem, Select, SelectChangeEvent } from "@mui/material";
+import { ReactNode } from "react";
 
 type Props = {
-  status: Participation
-}
+  status: Participation;
+  onChange(
+    event: SelectChangeEvent<Participation.StringType>,
+    child: ReactNode,
+  ): void;
+};
 
-export const ParticipationStatusSelectBox = ({ status }: Props) => (
+export const ParticipationStatusSelectBox = ({ status, onChange }: Props) => (
   <Select
     value={Participation.toString(status)}
     sx={{ margin: 1 }}
+    onChange={onChange}
   >
     <MenuItem value={Participation.toString(Participation.will)}>
       {Participation.toString(Participation.will)}

@@ -5,9 +5,12 @@ export class Participant {
   name: string;
   status: Participation;
   setStatus: Dispatch<SetStateAction<Participation>>;
+  isSettled: boolean;
+  setIsSettled: Dispatch<SetStateAction<boolean>>;
 
   constructor(name: string) {
     this.name = name;
     [this.status, this.setStatus] = useState<Participation>(Participation.will);
+    [this.isSettled, this.setIsSettled] = useState<boolean>(false);
   }
 }
