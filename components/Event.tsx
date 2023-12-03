@@ -1,6 +1,6 @@
 import { Event as EventType } from "@/types/Event";
 import { Participant } from "@/types/Participant";
-import { Add, ExpandMore } from "@mui/icons-material";
+import { Add, ExpandMore, OpenInNew } from "@mui/icons-material";
 import {
   Accordion,
   AccordionDetails,
@@ -8,6 +8,7 @@ import {
   Box,
   Button,
   Divider,
+  Link,
   Stack,
   Typography,
 } from "@mui/material";
@@ -26,6 +27,10 @@ export const Event = ({ event }: Props) => (
     </AccordionSummary>
     <AccordionDetails>
       <Stack>
+        <Link href={event.website} target="_blank" rel="noopener">
+          {event.website}
+          <OpenInNew />
+        </Link>
         {event.participants.map((participant: Participant) => (
           <Box key={participant.name}>
             <Divider />
