@@ -7,6 +7,7 @@ export default function Home() {
   const events: Event[] = [
     {
       name: "なにかイベント名（○○オフ、など）",
+      website: "https://www.example.com",
       participants: [
         new Participant("Arisu"),
         new Participant("Bob"),
