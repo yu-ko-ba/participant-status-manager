@@ -27,10 +27,14 @@ export const Event = ({ event }: Props) => (
     </AccordionSummary>
     <AccordionDetails>
       <Stack>
-        <Link href={event.website} target="_blank" rel="noopener">
-          {event.website}
-          <OpenInNew />
-        </Link>
+        {event.website == ""
+          ? ""
+          : (
+            <Link href={event.website} target="_blank" rel="noopener">
+              {event.website}
+              <OpenInNew />
+            </Link>
+          )}
         {event.participants.map((participant: Participant) => (
           <Box key={participant.name}>
             <Divider />
