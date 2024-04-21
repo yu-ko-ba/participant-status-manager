@@ -1,6 +1,7 @@
 import {
   AppBar,
   Box,
+  Button,
   CssBaseline,
   Divider,
   IconButton,
@@ -24,6 +25,34 @@ export const Header = () => {
         setAnchorEl(null);
       }}
     >
+      <MenuItem>
+        <Button
+          onClick={() => {
+            // TODO: JSONファイルとして書き出す処理
+            setAnchorEl(null);
+            alert("TODO: JSONファイルとして書き出す処理");
+          }}
+        >
+          エクスポート
+        </Button>
+      </MenuItem>
+
+      <Divider />
+
+      <MenuItem>
+        <Button
+          onClick={() => {
+            // TODO: JSONファイルから差分をマージする処理
+            setAnchorEl(null);
+            alert("TODO: JSONファイルから差分をマージする処理");
+          }}
+        >
+          インポート
+        </Button>
+      </MenuItem>
+
+      <Divider />
+
       <MenuItem>
         <Link href="https://github.com/yu-ko-ba/participant-status-manager/blob/main/package.json">
           オープンソース
