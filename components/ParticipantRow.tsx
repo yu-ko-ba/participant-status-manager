@@ -19,9 +19,13 @@ import { useState } from "react";
 
 type Props = {
   participant: Participant;
+  onParticipationChanged: (newStatus: Participation) => void;
+  onSettleStatusChanged: (settled: boolean) => void;
 };
 
-export const ParticipantRow = ({ participant }: Props) => {
+export const ParticipantRow = (
+  { participant, onParticipationChanged, onSettleStatusChanged }: Props,
+) => {
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
   const ParticipantRowMenu = () => (
@@ -46,7 +50,7 @@ export const ParticipantRow = ({ participant }: Props) => {
       <ParticipationStatusSelectBox
         status={participant.status}
         onChange={(e: SelectChangeEvent<Participation.StringType>) => {
-          participant.setStatus(
+          onParticipationChanged(
             Participation.fromParticipationStringType(
               e.target.value as Participation.StringType,
             ),
@@ -59,7 +63,7 @@ export const ParticipantRow = ({ participant }: Props) => {
           label="集金済み"
           value={participant.isSettled}
           onChange={(_, checked: boolean) => {
-            participant.setIsSettled(checked);
+            onSettleStatusChanged(checked);
           }}
         />
       </FormGroup>

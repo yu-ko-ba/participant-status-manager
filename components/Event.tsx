@@ -15,13 +15,23 @@ import {
 import { ParticipantRow } from "./ParticipantRow";
 import { AddParticipantDialog } from "./AddParticipantDialog";
 import { useState } from "react";
+import { Participation } from "@/types/participation";
 
 type Props = {
   event: EventType;
+  onParticipationChanged: (participation: Participation, index: number) => void;
+  onSettleStatusChanged: (settled: boolean, index: number) => void;
   onAddParticipantButtonClicked: (newParticipantName: string) => void;
 };
 
-export const Event = ({ event, onAddParticipantButtonClicked }: Props) => {
+export const Event = (
+  {
+    event,
+    onParticipationChanged,
+    onSettleStatusChanged,
+    onAddParticipantButtonClicked,
+  }: Props,
+) => {
   const [addparticipantDialogIsDisplayed, setAddparticipantDialogIsDisplayed] =
     useState(false);
 
@@ -45,7 +55,15 @@ export const Event = ({ event, onAddParticipantButtonClicked }: Props) => {
           {event.participants.map((participant: Participant, index: number) => (
             <Box key={index}>
               <Divider />
-              <ParticipantRow participant={participant} />
+              <ParticipantRow
+                participant={participant}
+                onParticipationChanged={(participation: Participation) => {
+                  onParticipationChanged(participation, index);
+                }}
+                onSettleStatusChanged={(settled: boolean) => {
+                  onSettleStatusChanged(settled, index);
+                }}
+              />
             </Box>
           ))}
           <Divider />
