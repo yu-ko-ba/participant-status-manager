@@ -13,9 +13,6 @@ export const RootPageComponent = ({ }: Props) => {
   const [events, setEvents] = useState<Event[]>([]);
   const [showAddEventDialogFlag, setShowAddEventDialogFlag] = useState(false);
 
-  const [addparticipantDialogIsDisplayed, setAddparticipantDialogIsDisplayed] =
-    useState(false);
-
   return (
     <Container maxWidth="md">
       <Header />
@@ -24,7 +21,10 @@ export const RootPageComponent = ({ }: Props) => {
         <div />
         <EventList
           events={events}
-          onAddParticipantButtonClicked={(index: number) => {
+          onAddParticipantButtonClicked={(
+            newParticipantName: string,
+            index: number,
+          ) => {
             setEvents(events.map((e: Event, i: number) => {
               if (i != index) {
                 return e;
@@ -34,7 +34,7 @@ export const RootPageComponent = ({ }: Props) => {
                 ...e,
                 participants: [
                   ...e.participants,
-                  new Participant("hoge"),
+                  new Participant(newParticipantName),
                 ],
               };
             }));

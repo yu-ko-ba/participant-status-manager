@@ -4,7 +4,10 @@ import { Event } from "./Event";
 
 type Props = {
   events: EventType[];
-  onAddParticipantButtonClicked: (index: number) => void;
+  onAddParticipantButtonClicked: (
+    newParticipantName: string,
+    index: number,
+  ) => void;
 };
 
 export const EventList = ({ events, onAddParticipantButtonClicked }: Props) => (
@@ -14,8 +17,8 @@ export const EventList = ({ events, onAddParticipantButtonClicked }: Props) => (
         <Event
           event={e}
           key={index}
-          onAddParticipantButtonClicked={() => {
-            onAddParticipantButtonClicked(index);
+          onAddParticipantButtonClicked={(name) => {
+            onAddParticipantButtonClicked(name, index);
           }}
         />
       ))
