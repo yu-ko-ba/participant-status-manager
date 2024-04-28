@@ -83,7 +83,7 @@ export const Header = () => {
         <CssBaseline />
         <AppBar component="nav">
           <Toolbar>
-            <Typography variant="h6">参加者名簿管理</Typography>
+            <Typography variant="h6">参加者名簿管理（デモ版）</Typography>
 
             <Box sx={{ flexGrow: 1 }} />
 

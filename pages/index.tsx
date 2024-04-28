@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>参加者名簿管理</title>
+        <title>参加者名簿管理（デモ版）</title>
       </Head>
 
       <RootPageComponent />
