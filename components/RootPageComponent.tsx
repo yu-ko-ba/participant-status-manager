@@ -5,12 +5,16 @@ import { Event } from "@/types/Event";
 import { useState } from "react";
 import { FloatingAddButton } from "./FloatingAddButton";
 import { AddEventDialog } from "./AddEventDialog";
+import { Participant } from "@/types/Participant";
 
 type Props = {};
 
 export const RootPageComponent = ({ }: Props) => {
   const [events, setEvents] = useState<Event[]>([]);
-  const [showAddDialogFlag, setShowAddDialogFlag] = useState(false);
+  const [showAddEventDialogFlag, setShowAddEventDialogFlag] = useState(false);
+
+  const [addparticipantDialogIsDisplayed, setAddparticipantDialogIsDisplayed] =
+    useState(false);
 
   return (
     <Container maxWidth="md">
@@ -18,11 +22,28 @@ export const RootPageComponent = ({ }: Props) => {
 
       <Stack spacing={2}>
         <div />
-        <EventList events={events} />
+        <EventList
+          events={events}
+          onAddParticipantButtonClicked={(index: number) => {
+            setEvents(events.map((e: Event, i: number) => {
+              if (i != index) {
+                return e;
+              }
+
+              return {
+                ...e,
+                participants: [
+                  ...e.participants,
+                  new Participant("hoge"),
+                ],
+              };
+            }));
+          }}
+        />
       </Stack>
 
       <AddEventDialog
-        open={showAddDialogFlag}
+        open={showAddEventDialogFlag}
         onCreateButtonClick={(name, url) => {
           setEvents([
             ...events,
@@ -34,13 +55,13 @@ export const RootPageComponent = ({ }: Props) => {
           ]);
         }}
         onClose={() => {
-          setShowAddDialogFlag(false);
+          setShowAddEventDialogFlag(false);
         }}
       />
 
       <FloatingAddButton
         onClick={() => {
-          setShowAddDialogFlag(true);
+          setShowAddEventDialogFlag(true);
         }}
       />
     </Container>

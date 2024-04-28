@@ -4,10 +4,21 @@ import { Event } from "./Event";
 
 type Props = {
   events: EventType[];
+  onAddParticipantButtonClicked: (index: number) => void;
 };
 
-export const EventList = ({ events }: Props) => (
+export const EventList = ({ events, onAddParticipantButtonClicked }: Props) => (
   <Stack spacing={2}>
-    {events ? events.map((e: EventType) => <Event event={e} key={e.name} />) : ""}
+    {events
+      ? events.map((e: EventType, index: number) => (
+        <Event
+          event={e}
+          key={index}
+          onAddParticipantButtonClicked={() => {
+            onAddParticipantButtonClicked(index);
+          }}
+        />
+      ))
+      : ""}
   </Stack>
 );

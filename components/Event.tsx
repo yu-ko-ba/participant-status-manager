@@ -16,9 +16,10 @@ import { ParticipantRow } from "./ParticipantRow";
 
 type Props = {
   event: EventType;
+  onAddParticipantButtonClicked: () => void;
 };
 
-export const Event = ({ event }: Props) => (
+export const Event = ({ event, onAddParticipantButtonClicked }: Props) => (
   <Accordion>
     <AccordionSummary expandIcon={<ExpandMore />}>
       <Typography variant="h6">
@@ -35,15 +36,18 @@ export const Event = ({ event }: Props) => (
               <OpenInNew />
             </Link>
           )}
-        {event.participants.map((participant: Participant) => (
-          <Box key={participant.name}>
+        {event.participants.map((participant: Participant, index: number) => (
+          <Box key={index}>
             <Divider />
             <ParticipantRow participant={participant} />
           </Box>
         ))}
         <Divider />
         <Stack direction="row">
-          <Button startIcon={<Add />}>
+          <Button
+            startIcon={<Add />}
+            onClick={onAddParticipantButtonClicked}
+          >
             参加者を追加
           </Button>
         </Stack>
