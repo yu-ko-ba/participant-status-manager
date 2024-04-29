@@ -5,13 +5,40 @@ import { Event } from "@/types/Event";
 import { useState } from "react";
 import { FloatingAddButton } from "./FloatingAddButton";
 import { AddEventDialog } from "./AddEventDialog";
-import { Participant } from "@/types/Participant";
 import { Participation } from "@/types/participation";
 
-type Props = {};
+type Props = {
+  events: Event[];
 
-export const RootPageComponent = ({ }: Props) => {
-  const [events, setEvents] = useState<Event[]>([]);
+  onParticipationChanged: (
+    participation: Participation,
+    eventsIndex: number,
+    participantsIndex: number,
+  ) => void;
+
+  onSettleStatusChanged: (
+    settled: boolean,
+    eventsIndex: number,
+    participantsIndex: number,
+  ) => void;
+
+  onAddParticipantButtonClicked: (
+    newParticipantName: string,
+    index: number,
+  ) => void;
+
+  onCreateEventButtonClicked(eventName: string, eventWebsite: string): void;
+};
+
+export const RootPageComponent = (
+  {
+    events,
+    onParticipationChanged,
+    onSettleStatusChanged,
+    onAddParticipantButtonClicked,
+    onCreateEventButtonClicked,
+  }: Props,
+) => {
   const [showAddEventDialogFlag, setShowAddEventDialogFlag] = useState(false);
 
   return (
@@ -22,93 +49,15 @@ export const RootPageComponent = ({ }: Props) => {
         <div />
         <EventList
           events={events}
-          onParticipationChanged={(
-            participation: Participation,
-            eventsIndex: number,
-            participantsIndex: number,
-          ) => {
-            setEvents(events.map((event: Event, index: number) => {
-              if (index != eventsIndex) {
-                return event;
-              }
-
-              return {
-                ...event,
-                participants: event.participants.map(
-                  (participant: Participant, index: number) => {
-                    if (index != participantsIndex) {
-                      return participant;
-                    }
-
-                    return {
-                      ...participant,
-                      status: participation,
-                    };
-                  },
-                ),
-              };
-            }));
-          }}
-          onSettleStatusChanged={(
-            settled: boolean,
-            eventsIndex: number,
-            participantsIndex: number,
-          ) => {
-            setEvents(events.map((event: Event, index: number) => {
-              if (index != eventsIndex) {
-                return event;
-              }
-
-              return {
-                ...event,
-                participants: event.participants.map(
-                  (participant: Participant, index: number) => {
-                    if (index != participantsIndex) {
-                      return participant;
-                    }
-
-                    return {
-                      ...participant,
-                      isSettled: settled,
-                    };
-                  },
-                ),
-              };
-            }));
-          }}
-          onAddParticipantButtonClicked={(
-            newParticipantName: string,
-            index: number,
-          ) => {
-            setEvents(events.map((e: Event, i: number) => {
-              if (i != index) {
-                return e;
-              }
-
-              return {
-                ...e,
-                participants: [
-                  ...e.participants,
-                  new Participant(newParticipantName),
-                ],
-              };
-            }));
-          }}
+          onParticipationChanged={onParticipationChanged}
+          onSettleStatusChanged={onSettleStatusChanged}
+          onAddParticipantButtonClicked={onAddParticipantButtonClicked}
         />
       </Stack>
 
       <AddEventDialog
         open={showAddEventDialogFlag}
-        onCreateButtonClick={(name, url) => {
-          setEvents([
-            ...events,
-            {
-              name: name,
-              website: url,
-              participants: [],
-            },
-          ]);
-        }}
+        onCreateButtonClick={onCreateEventButtonClicked}
         onClose={() => {
           setShowAddEventDialogFlag(false);
         }}
